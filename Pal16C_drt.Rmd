@@ -1,0 +1,164 @@
+---
+title: "Pal16C_drt"
+output: 
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+
+```{r rows.print=6,echo=FALSE}
+#file <- "D:/APARICIO JOHAN/CGIAR/Ariza, Daniel (CIAT) - Johan/VEF_raw_data/all_merged_to_send.csv"
+file <- "C:/Users/johan/CGIAR/Ariza, Daniel (CIAT) - Johan_Aparicio/VEF_raw_data/all_merged_to_send.csv"
+Data <- subset(read.csv(file),subset = dataset=="Pal16C_drt")
+# Eliminar duplicados en filas y columnas
+"dup" <- function(data,col="col",row="row"){
+  dup <- data[,c(col,row)][duplicated(data[,c(col,row)]), ] 
+  data  <-data[ which(!duplicated(data[,c(col,row)])) , ]
+  return(data)
+}
+Data <- dup(Data)
+```
+
+
+
+Traits in this trial.
+
+1. Days to Flowering **(DF )**
+1. Day to Psiological Maturity **(DPM)**
+1. Meters Harvested **(MEHA)** 
+1. Meters Square Harvested **(MT2H)**
+1. Plants Harvested **(PLHA)**
+1. Total Seed Weight **(TSW)**
+1. Yield per Hectar **(YDHA)**
+1. Yield per Plant **(YHPL)**
+
+
+```{r , echo=FALSE, warning=FALSE,message=FALSE}
+#install.packages("SpATS")
+library(SpATS)
+Data$line <- as.factor(Data$line)
+Data$col_f = factor(Data$col)
+Data$row_f = factor(Data$row)
+ncols = length(unique(Data$col))
+nrows = length(unique(Data$row))
+Modelo.1=SpATS(response='YDHPL',
+              genotype='line', genotype.as.random=T,
+              fixed=NULL ,
+              spatial = ~ PSANOVA(col, row, nseg = c(ncols,nrows),   degree=c(3,3),nest.div=2),
+              random = ~ row_f + col_f , data=Data,
+              control = list(tolerance=1e-03, monitoring=0))
+Modelo.2=SpATS(response='YDHA',
+              genotype='line', genotype.as.random=T,
+              fixed=NULL ,
+              spatial = ~ PSANOVA(col, row, nseg = c(ncols,nrows),   degree=c(3,3),nest.div=2),
+              random = ~ row_f + col_f , data=Data,
+              control = list(tolerance=1e-03, monitoring=0))
+Modelo.3=SpATS(response='PLHA',
+              genotype='line', genotype.as.random=T,
+              fixed=NULL ,
+              spatial = ~ PSANOVA(col, row, nseg = c(ncols,nrows),   degree=c(3,3),nest.div=2),
+              random = ~ row_f + col_f , data=Data,
+              control = list(tolerance=1e-03, monitoring=0))
+Modelo.4=SpATS(response='DF',
+              genotype='line', genotype.as.random=T,
+              fixed=NULL ,
+              spatial = ~ PSANOVA(col, row, nseg = c(ncols,nrows),   degree=c(3,3),nest.div=2),
+              random = ~ row_f + col_f , data=Data,
+              control = list(tolerance=1e-03, monitoring=0))
+Modelo.5=SpATS(response='DPM',
+              genotype='line', genotype.as.random=T,
+              fixed=NULL ,
+              spatial = ~ PSANOVA(col, row, nseg = c(ncols,nrows),   degree=c(3,3),nest.div=2),
+              random = ~ row_f + col_f , data=Data,
+              control = list(tolerance=1e-03, monitoring=0))
+Modelo.6=SpATS(response='SW100',
+              genotype='line', genotype.as.random=T,
+              fixed=NULL ,
+              spatial = ~ PSANOVA(col, row, nseg = c(ncols,nrows),   degree=c(3,3),nest.div=2),
+              random = ~ row_f + col_f , data=Data,
+              control = list(tolerance=1e-03, monitoring=0))
+Modelo.7=SpATS(response='TSW',
+              genotype='line', genotype.as.random=T,
+              fixed=NULL ,
+              spatial = ~ PSANOVA(col, row, nseg = c(ncols,nrows),   degree=c(3,3),nest.div=2),
+              random = ~ row_f + col_f , data=Data,
+              control = list(tolerance=1e-03, monitoring=0))
+Modelo.8=SpATS(response='POM',
+              genotype='line', genotype.as.random=T,
+              fixed=NULL ,
+              spatial = ~ PSANOVA(col, row, nseg = c(ncols,nrows),   degree=c(3,3),nest.div=2),
+              random = ~ row_f + col_f , data=Data,
+              control = list(tolerance=1e-03, monitoring=0))
+```
+
+
+
+# Traits {.tabset .tabset-fade}
+
+## YDHPL
+
+<center>
+```{r, echo=FALSE}
+plot(Modelo.1)
+```
+</center>
+
+## YDHA
+
+<center>
+```{r, echo=FALSE}
+plot(Modelo.2)
+```
+</center>
+
+## PLHA
+<center>
+```{r, echo=FALSE}
+plot(Modelo.3)
+```
+</center>
+
+## DF
+<center>
+```{r, echo=FALSE}
+plot(Modelo.4)
+```
+</center>
+
+## DPM
+
+<center>
+```{r, echo=FALSE}
+plot(Modelo.5)
+```
+</center>
+
+## SW100
+
+<center>
+```{r, echo=FALSE}
+plot(Modelo.6)
+```
+</center>
+
+## TSW
+
+<center>
+```{r, echo=FALSE}
+plot(Modelo.7)
+```
+</center>
+
+## POM
+
+<center>
+```{r, echo=FALSE}
+plot(Modelo.8)
+```
+</center>

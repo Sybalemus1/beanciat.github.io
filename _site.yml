@@ -6,6 +6,41 @@ navbar:
       href: first_observations.html
     - text: "Basic Workflow"
       href: basic_workflow.html
+    - text: "Trials"
+      menu:
+        - text: "2013"
+        - text: "Pal13C_drt"
+          href: Pal13C_drt.html
+        - text: "---------"
+        - text: "2014"
+        - text: "Pal14A_irr"
+          href: Pal14A_irr.html
+        - text: "Pal14C_drt"
+          href: Pal14C_drt.html
+        - text: "---------"
+        - text: "2015"
+        - text: "Pal15C_irr"
+          href: Pal15C_irr.html
+        - text: "Pal15C_drt"
+          href: Pal15C_drt.html
+        - text: "---------"
+        - text: "2016"
+        - text: "Pal16C_drt"
+          href: Pal16C_drt.html
+        - text: "Dar16C_hiP"
+          href: Dar16C_hiP.html
+        - text: "Dar16C_mdP"
+          href: Dar16C_mdP.html
+        - text: "---------"
+        - text: "2017"
+        - text: "Pal17C_drt"
+          href: Pal17C_drt.html
+        - text: "---------"
+        - text: "2018"
+        - text: "Pal18A_irr"
+          href: Pal18A_irr.html
+        - text: "Pal18C_drt"
+          href: Pal18C_drt.html
     - text: "Getting Sophisticated"
       href: getting_sophisticated.html
     - text: "Others"
