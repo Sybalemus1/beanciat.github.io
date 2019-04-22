@@ -9,7 +9,12 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
+```{r , echo=FALSE, warning=FALSE,message=FALSE}
+library(plotly)
+library(ggplot2)
+library(dplyr)
+library(RColorBrewer)
+```
 
 
 ```{r rows.print=6,echo=FALSE}
@@ -29,15 +34,11 @@ Data <- dup(Data)
 
 Traits in this trial.
 
-1. Days to Flowering **(DF )**
-1. Meters Harvested **(MEHA)** 
-1. Meters Square Harvested **(MT2H)**
-1. Plants Harvested **(PLHA)**
-1. Total Seed Weight **(TSW)**
-1. Yield per Hectar **(YDHA)**
 1. Yield per Plant **(YHPL)**
-1. PHI 
-
+1. Yield per Hectar **(YDHA)**
+1. Plants Harvested **(PLHA)**
+1. Days to Flowering **(DF )**
+1. Total Seed Weight **(TSW)**
 
 ```{r , echo=FALSE, warning=FALSE,message=FALSE}
 #install.packages("SpATS")
@@ -72,12 +73,6 @@ Modelo.4=SpATS(response='DF',
               random = ~ row_f + col_f , data=Data,
               control = list(tolerance=1e-03, monitoring=0))
 Modelo.7=SpATS(response='TSW',
-              genotype='line', genotype.as.random=T,
-              fixed=NULL ,
-              spatial = ~ PSANOVA(col, row, nseg = c(ncols,nrows),   degree=c(3,3),nest.div=2),
-              random = ~ row_f + col_f , data=Data,
-              control = list(tolerance=1e-03, monitoring=0))
-Modelo.8=SpATS(response='POM',
               genotype='line', genotype.as.random=T,
               fixed=NULL ,
               spatial = ~ PSANOVA(col, row, nseg = c(ncols,nrows),   degree=c(3,3),nest.div=2),
@@ -125,6 +120,100 @@ plot(Modelo.4)
 <center>
 ```{r, echo=FALSE}
 plot(Modelo.7)
+```
+</center>
+
+
+
+
+
+# Correlations 
+
+```{r, echo=FALSE, warning=FALSE,message=FALSE}
+B1 <- predict(Modelo.1,which="line")[,c("line","predicted.values")]
+names(B1) <- c("line","YDHPL")
+
+B2 <- predict(Modelo.2,which="line")[,c("line","predicted.values")]
+names(B2) <- c("line","YDHA")
+
+B3 <- predict(Modelo.3,which="line")[,c("line","predicted.values")]
+names(B3) <- c("line","PLHA")
+
+B4 <- predict(Modelo.4,which="line")[,c("line","predicted.values")]
+names(B4) <- c("line","DF")
+
+B7 <- predict(Modelo.7,which="line")[,c("line","predicted.values")]
+names(B7) <- c("line","TSW")
+
+
+all_effects <- list(B1,B2,B3,B4,B7)
+Blups <- data.frame(line=levels(Data$line))
+for (i in length(all_effects):1) {
+  w <- all_effects[i]
+  Blups <- merge(w,Blups,by="line",all=TRUE)
+}
+
+h1 <- getHeritability(Modelo.1)
+h2 <- getHeritability(Modelo.2)
+h3 <- getHeritability(Modelo.3)
+h4 <- getHeritability(Modelo.4)
+h7 <- getHeritability(Modelo.7)
+```
+
+
+<center>
+```{r, echo=FALSE , warning=FALSE,message=FALSE , fig.width=4,fig.height=3}
+library(psych)
+
+mgc_mod = Blups[,-1]
+myCors1 = corr.test(mgc_mod, use = 'pairwise.complete.obs', adjust = "fdr", alpha = 0.05)
+myCors1 = myCors1[c(1,4)]
+
+myCors1 = lapply(myCors1, function(x){
+  
+  x[upper.tri(x, T)] = NA
+  x[upper.tri(x, T) & lower.tri(x,T)] = 1
+  
+  x  = as.data.frame(t(x))
+  x[,'col'] = colnames(x)
+  x  = reshape::melt(x, id='col')
+  colnames(x) = c('col','row','value')
+  
+  x$name = round(x$value,2)
+  
+  x$col = factor(x$col, levels = colnames(mgc_mod))
+  x$row = factor(x$row, levels = rev(colnames(mgc_mod)))
+  x = na.omit(x)
+  
+})
+
+myCors1 = merge(x = myCors1$r, y = myCors1$p, by = c('col','row'))
+myCors1 = myCors1[,c(1,2,4,5)]
+
+myCors1$signi = cut(x = myCors1$value.y, breaks = c(0, .0001, .001, .01, Inf), right = F, labels = c('***','**','*', 'ns'))
+
+myCors1[myCors1$col == myCors1$row, 'name.x'] = NA
+
+myCors1$label = paste(myCors1$name.x, myCors1$sign, sep='\n')
+
+h = c("YDHPL" = as.vector(h1),"YDHA" = as.vector(h2),
+      "PLHA" = as.vector(h3),"DF" = as.vector(h4),
+      "TSW"=  as.vector(h7)
+       )
+
+myCors1[myCors1$col == myCors1$row, 'label'] = h[as.character(myCors1[myCors1$col == myCors1$row, 'row'])]
+
+
+textColors1 = ifelse(myCors1$name.x<0.6 & myCors1$name.x>=-0.7, 'black', 'white')
+textColors1[is.na(textColors1)] = 'white'
+
+p = ggplot(data = myCors1, aes(x=col, y=row, fill=name.x)) + 
+  geom_tile(color='gray') + theme_minimal(base_size=13) +
+  geom_text(aes(x=col, y=row, label=label), color=textColors1, size=3) +
+  scale_fill_gradient2(low='#db4437', mid='white', high='#4285f4') + labs(x=NULL, y=NULL) +
+  theme(axis.text.x = element_text(angle = 40, hjust = 1), legend.position='none',
+        panel.grid.minor.x = element_blank(), panel.grid.major = element_blank())
+p
 ```
 </center>
 

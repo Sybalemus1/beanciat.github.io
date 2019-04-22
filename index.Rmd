@@ -13,20 +13,20 @@ output:
 
 ---
 
-It's possible to create well-designed websites for free using [RStudio's R Markdown](http://rmarkdown.rstudio.com/) and hosting them on [Github](http://github.com). This is very new and incredibly cool. It is a really powerful way to communicate science using the same reproducible workflow you use for your analyses and collaborations.
+<p align="justify">
+Within the grain legumes, beans are among the **most important** for human consumption. It is grown in **129 countries** on five continents and it is estimated that some **400 million** people in the tropics consume it. _Latin America_ is the area of greatest production and consumption, it is estimated that more than **45%** comes from this region where it is considered one of the basic products of the peasant economy.
+</p>
 
-***Creating websites with R Markdown can be done without knowing R or HTML, CSS, etc,*** and that's where we'll start. However, R Markdown integrates with these tools so the more you know the more complex and beautiful your website can be. This tutorial borrows heavily from a lot of great tutorials and resources you should check out too -- there are links throughout. 
-
-The best way to learn is to follow along with your own laptop, but all are welcome. We'll spend half the time with the tutorial and half the time for you to work on your own website and get help. If you bring your laptop please do this beforehand: 
-
-1. install [RStudio](https://www.rstudio.com/products/rstudio/download/)
-1. create a [GitHub]((http://github.com)) account ([advice](http://happygitwithr.com/github-acct.html))
-1. set up your computer to talk to GitHub
-    - have RStudio linked directly (preferred) ([instructions sections 8-14](http://happygitwithr.com/hello-git.html))
-    - or install the [Desktop App](https://desktop.github.com/)
-    - or be familiar with git commands for the command line ([tutorial](https://try.github.io/levels/1/challenges/1))
+<p align="justify">
+[CIAT's](https://ciat.cgiar.org/) research shows a long and successful trajectory in the development of varieties with genetic resistance to the main pests and diseases that affect the crop. Currently, the Center's scientists emphasize the development of high performance lines with tolerance to drought, heat, adverse soil conditions such as low phosphorus availability and compaction, as well as promising lines for high symbiotic nitrogen fixation, in harmony with the demand for commercial grain. [BlogCIAT](https://blog.ciat.cgiar.org/es/llego-la-hora-de-hablar-de-frijol-en-colombia/#)
+</p>
 
 <br>
+
+This webpage was developed with [RStudio](https://www.rstudio.com/products/rstudio/download/)-[Rmarkdown]() and was published into [GitHub](http://github.com)
+
+
+
 
 ----
 
