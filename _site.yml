@@ -39,7 +39,7 @@ navbar:
           href: Pal18A_irr.html
         - text: "Pal18C_drt"
           href: Pal18C_drt.html
-    - text: "Getting Sophisticated"
+    - text: "Multi-trials"
       href: getting_sophisticated.html
   right:
     - icon: fa-github fa-lg
@@ -47,7 +47,7 @@ navbar:
 output_dir: "."
 output:
   html_document:
-    theme:  simplex
+    theme:  united
     highlight: textmate
     include:
       after_body: _footer.html

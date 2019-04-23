@@ -20,14 +20,14 @@ library(RColorBrewer)
 
 
 ```{r rows.print=6,echo=FALSE}
-#file <- "D:/APARICIO JOHAN/CGIAR/Ariza, Daniel (CIAT) - Johan/VEF_raw_data/all_merged_to_send.csv"
-file <- "C:/Users/johan/CGIAR/Ariza, Daniel (CIAT) - Johan_Aparicio/VEF_raw_data/all_merged_to_send.csv"
+file <- "D:/APARICIO JOHAN/CGIAR/Ariza, Daniel (CIAT) - Johan/VEF_raw_data/all_merged_to_send.csv"
+#file <- "C:/Users/johan/CGIAR/Ariza, Daniel (CIAT) - Johan_Aparicio/VEF_raw_data/all_merged_to_send.csv"
 Data <- subset(read.csv(file),subset = dataset=="Pal13C_drt")
 Data <- droplevels(Data)
 ```
 
 
-Traits in this trial.
+Traits in this trial. (O2N)
 
 1. Yield per Plant **(YHPL)**
 1. Yield per Hectar **(YDHA)**
@@ -210,4 +210,5 @@ p
 ```
 </center>
 
+----
 

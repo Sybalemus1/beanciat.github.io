@@ -18,8 +18,8 @@ library(RColorBrewer)
 
 
 ```{r rows.print=6,echo=FALSE}
-#file <- "D:/APARICIO JOHAN/CGIAR/Ariza, Daniel (CIAT) - Johan/VEF_raw_data/all_merged_to_send.csv"
-file <- "C:/Users/johan/CGIAR/Ariza, Daniel (CIAT) - Johan_Aparicio/VEF_raw_data/all_merged_to_send.csv"
+file <- "D:/APARICIO JOHAN/CGIAR/Ariza, Daniel (CIAT) - Johan/VEF_raw_data/all_merged_to_send.csv"
+#file <- "C:/Users/johan/CGIAR/Ariza, Daniel (CIAT) - Johan_Aparicio/VEF_raw_data/all_merged_to_send.csv"
 Data <- subset(read.csv(file),subset = dataset=="Dar16C_mdP")
 # Eliminar duplicados en filas y columnas
 "dup" <- function(data,col="col",row="row"){
@@ -218,4 +218,4 @@ p
 </center>
 
 
-
+----

@@ -28,8 +28,8 @@ library(RColorBrewer)
 
 
 ```{r rows.print=5,echo=FALSE}
-#file <- "D:/APARICIO JOHAN/CGIAR/Ariza, Daniel (CIAT) - Johan/VEF_raw_data/all_merged_to_send.csv"
-file <- "C:/Users/johan/CGIAR/Ariza, Daniel (CIAT) - Johan_Aparicio/VEF_raw_data/all_merged_to_send.csv"
+file <- "D:/APARICIO JOHAN/CGIAR/Ariza, Daniel (CIAT) - Johan/VEF_raw_data/all_merged_to_send.csv"
+#file <- "C:/Users/johan/CGIAR/Ariza, Daniel (CIAT) - Johan_Aparicio/VEF_raw_data/all_merged_to_send.csv"
 Data <- read.csv(file)
 head(Data)
 ```

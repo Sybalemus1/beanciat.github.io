@@ -18,8 +18,8 @@ library(RColorBrewer)
 
 
 ```{r rows.print=6,echo=FALSE}
-#file <- "D:/APARICIO JOHAN/CGIAR/Ariza, Daniel (CIAT) - Johan/VEF_raw_data/all_merged_to_send.csv"
-file <- "C:/Users/johan/CGIAR/Ariza, Daniel (CIAT) - Johan_Aparicio/VEF_raw_data/all_merged_to_send.csv"
+file <- "D:/APARICIO JOHAN/CGIAR/Ariza, Daniel (CIAT) - Johan/VEF_raw_data/all_merged_to_send.csv"
+#file <- "C:/Users/johan/CGIAR/Ariza, Daniel (CIAT) - Johan_Aparicio/VEF_raw_data/all_merged_to_send.csv"
 Data <- subset(read.csv(file),subset = dataset=="Pal16C_drt")
 # Eliminar duplicados en filas y columnas
 "dup" <- function(data,col="col",row="row"){
@@ -218,7 +218,7 @@ h8 <- getHeritability(Modelo.8)
 
 
 <center>
-```{r, echo=FALSE , warning=FALSE,message=FALSE , fig.width=4,fig.height=3}
+```{r, echo=FALSE , warning=FALSE,message=FALSE , fig.width=5,fig.height=4}
 library(psych)
 
 mgc_mod = Blups[,-1]
@@ -274,4 +274,5 @@ p
 ```
 </center>
 
+----
 
