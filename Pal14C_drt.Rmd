@@ -208,11 +208,13 @@ h5 <- getHeritability(Modelo.5)
 h6 <- getHeritability(Modelo.6)
 h7 <- getHeritability(Modelo.7)
 h8 <- getHeritability(Modelo.8)
+
+write.csv(Blups,  paste0("datasets/","BLUPs_",Data[1,"dataset"],".csv"), row.names = FALSE)
 ```
 
 
 <center>
-```{r, echo=FALSE , warning=FALSE,message=FALSE , fig.width=4,fig.height=3}
+```{r, echo=FALSE , warning=FALSE,message=FALSE , fig.width=5,fig.height=4}
 library(psych)
 
 mgc_mod = Blups[,-1]
@@ -267,5 +269,7 @@ p = ggplot(data = myCors1, aes(x=col, y=row, fill=name.x)) +
 p
 ```
 </center>
+
+<a href="datasets/BLUPs_Pal14C_drt.csv" download="BLUPs_Pal14C_drt"> Download BLUPs </a>
 
 ----

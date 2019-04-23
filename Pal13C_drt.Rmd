@@ -152,6 +152,8 @@ h2 <- getHeritability(Modelo.2)
 h3 <- getHeritability(Modelo.3)
 h4 <- getHeritability(Modelo.4)
 h5 <- getHeritability(Modelo.5)
+
+write.csv(Blups,  paste0("datasets/","BLUPs_",Data[1,"dataset"],".csv"), row.names = FALSE)
 ```
 
 
@@ -204,11 +206,16 @@ p = ggplot(data = myCors1, aes(x=col, y=row, fill=name.x)) +
   geom_tile(color='gray') + theme_minimal(base_size=13) +
   geom_text(aes(x=col, y=row, label=label), color=textColors1, size=3) +
   scale_fill_gradient2(low='#db4437', mid='white', high='#4285f4') + labs(x=NULL, y=NULL) +
-  theme(axis.text.x = element_text(angle = 40, hjust = 1), legend.position='none',
+  theme(axis.text.x = element_text(angle = 40, hjust = 1), legend.position='none', 
         panel.grid.minor.x = element_blank(), panel.grid.major = element_blank())
 p
 ```
 </center>
+
+
+
+<a href="datasets/BLUPs_Pal13C_drt.csv" download="BLUPs_Pal13C_drt"> Download BLUPs </a>
+
 
 ----
 

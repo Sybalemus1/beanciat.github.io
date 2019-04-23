@@ -216,6 +216,8 @@ h5 <- getHeritability(Modelo.5)
 h6 <- getHeritability(Modelo.6)
 h7 <- getHeritability(Modelo.7)
 h8 <- getHeritability(Modelo.8)
+
+write.csv(Blups,  paste0("datasets/","BLUPs_",Data[1,"dataset"],".csv"), row.names = FALSE)
 ```
 
 
@@ -276,5 +278,6 @@ p
 ```
 </center>
 
+<a href="datasets/BLUPs_Pal18C_drt.csv" download="BLUPs_Pal18C_drt"> Download BLUPs </a>
 
 ----
